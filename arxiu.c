@@ -27,7 +27,7 @@ void InitData(){ // Apliquem el codi que ens dona l'exercici per generar matrius
             V2[i]=(i>=N/2)?(((i*j)%3)?-1:1)*(100.0*(rand()/(1.0*RAND_MAX))):0.0;
             V3[i]=(((i*j)%5)?-1:1)*(100.0*(rand()/(1.0*RAND_MAX)));
             }
-        }
+}
 
 //Punt 1
 void PrintVect( float vect[N], int from, int numel ){
@@ -85,9 +85,10 @@ void Projection( float vect1[N], float vect2[N], float vectres[N] ){
         float divisor = Scalar(vect1,vect2); // Fem servir la nostra funció per obtenir el producte escalar dels dos vectors.
         float magV1 = Magnitude(vect2); // Fem servir la nostra funció per obtenir la magnitud del segón vector.
         float escalar = (divisor/magV1);
-        vectres[0] = escalar*vect2[0]; // Apliquem la definció de la projecció i assignem els valors de cada índex del vector resultat.
-        vectres[1] = escalar*vect2[1];
-        vectres[2] = escalar*vect2[2];
+
+	for( int i = 0; i < N; i++ ){
+            vectres[i] = escalar*vect2[i]; // Apliquem la definció de la projecció i assignem els valors de cada índex del vector resultat.
+        }
 }
 
 //Punt 8
@@ -148,7 +149,7 @@ int DiagonalDom( float M[N][N] ){
         	    return 0;  // No es diagonal dominant
         	}
     	} // I axò ho fem per CADA linia. En cas que no s'hagi complert a cap linia...
-    return 1;  // És diagonal dominant
+    	return 1;  // És diagonal dominant
 }
 
 //punt 12
@@ -251,7 +252,7 @@ int main (){
     }
 
     Projection(V2,V3,V5);
-    printf("\nL'escalar dels vectors demanats és: (%.2f, %.2f, %.2f)\n", V5[0],V5[1],V5[2]);
+    printf("\nLa projecció del primer vector sobre el segon és: (%.2f, %.2f, %.2f)\n", V5[0],V5[1],V5[2]);
 
     float InfNorm = Infininorm(Mat);
     float UNorm = Onenorm(Mat);
